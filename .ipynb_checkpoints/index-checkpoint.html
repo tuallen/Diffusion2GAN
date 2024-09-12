@@ -93,8 +93,8 @@
 
     function video_click() {
       if (v.paused){
-        v.play();
-        v2.play(); 
+       v.play();
+       v2.play(); 
       }
       else{
         v.pause();
@@ -103,15 +103,6 @@
       v.currentTime = v2.currentTime;
       v2.currentTime = v.currentTime;
     }
-
-    function syncVideos() {
-      if (!v.paused && !v2.paused) {
-        v.currentTime = v2.currentTime;
-        v2.currentTime = v.currentTime;
-      }
-    }
-
-    setTimeout(syncVideos, 2000); // Sync after 2 seconds
 
     var videoContainer = document.getElementById("video-compare-container"),
     videoClipper = document.getElementById("video-clipper"),
