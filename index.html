@@ -5,103 +5,63 @@
     body {
       background: #fff;
       margin: 2rem;
-      font-family: Helvetica, Arial, sans-serif;
     }
 
     #video-compare-container {
-      width: 100%;
+      display: inline-block;
+      line-height: 0;
       position: relative;
-      overflow: hidden;
-      cursor: pointer;
-      color: #f3f3f3;
+      width: 100%;
+      padding-top: 42.3%;
     }
 
     #video-compare-container > video {
       width: 100%;
-      height: 100%;
       position: absolute;
       top: 0;
-      left: 0;
+      height: 100%;
     }
 
     #video-clipper {
       width: 50%;
-      height: 100%;
       position: absolute;
       top: 0;
-      left: 0;
+      bottom: 0;
       overflow: hidden;
     }
 
     #video-clipper video {
       width: 200%;
-      height: 100%;
-      position: absolute;
-      top: 0;
-    }
-
-    /* Slider Styles */
-    .jx-handle {
       position: absolute;
       height: 100%;
-      width: 40px;
-      cursor: col-resize;
-      z-index: 15;
-      left: 50%;
-      margin-left: -20px;
     }
 
-    .jx-control {
-      height: 100%;
-      margin-right: auto;
-      margin-left: auto;
-      width: 3px;
-      background-color: currentColor;
-    }
-
-    .jx-arrow {
-      position: absolute;
-      margin: auto;
-      top: 0;
-      bottom: 0;
-      width: 0;
-      height: 0;
-      transition: all .2s ease;
-    }
-
-    .jx-arrow.jx-left {
-      left: 2px;
-      border-style: solid;
-      border-width: 8px 8px 8px 0;
-      border-color: transparent currentColor transparent transparent;
-    }
-
-    .jx-arrow.jx-right {
-      right: 2px;
-      border-style: solid;
-      border-width: 8px 0 8px 8px;
-      border-color: transparent transparent transparent currentColor;
-    }
-
-    .jx-handle:hover .jx-arrow.jx-left,
-    .jx-handle:active .jx-arrow.jx-left {
-      left: -1px;
-    }
-
-    .jx-handle:hover .jx-arrow.jx-right,
-    .jx-handle:active .jx-arrow.jx-right {
-      right: -1px;
-    }
-    
     #slider-bar {
       position: absolute;
       top: 0;
       bottom: 0;
-      width: 3px;
-      background-color: currentColor;
-      left: 50%;
+      width: 2px;
+      background: white;
       z-index: 5;
       pointer-events: none;
+    }
+
+    #left-arrow, #right-arrow {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 20px;
+      color: white;
+      z-index: 6;
+      pointer-events: none;
+    }
+
+    #left-arrow {
+      left: calc(50% - 15px);
+    }
+
+    #right-arrow {
+      right: calc(50% - 15px);
     }
   </style>
 </head>
@@ -121,15 +81,9 @@
         <source src="playroom_lg.mp4">
       </video>
     </div>
-
-    <!-- Handle and Control Bar -->
-    <div class="jx-handle">
-      <div class="jx-control"></div>
-      <div class="jx-arrow jx-left"></div>
-      <div class="jx-arrow jx-right"></div>
-    </div>
-
     <div id="slider-bar"></div>
+    <div id="left-arrow">&#9664;</div> <!-- Left arrow -->
+    <div id="right-arrow">&#9654;</div> <!-- Right arrow -->
   </div>
 
   <script>
@@ -137,10 +91,11 @@
     var v2 = document.getElementById("tgt");
 
     function video_click() {
-      if (v.paused) {
-        v.play();
-        v2.play(); 
-      } else {
+      if (v.paused){
+       v.play();
+       v2.play(); 
+      }
+      else{
         v.pause();
         v2.pause();
       }
@@ -150,16 +105,24 @@
 
     var videoContainer = document.getElementById("video-compare-container"),
     videoClipper = document.getElementById("video-clipper"),
+    clippedVideo = videoClipper.getElementsByTagName("video")[0],
     sliderBar = document.getElementById("slider-bar"),
-    handle = document.querySelector(".jx-handle");
+    leftArrow = document.getElementById("left-arrow"),
+    rightArrow = document.getElementById("right-arrow");
 
     function trackLocation(e) {
       var rect = videoContainer.getBoundingClientRect(),
         position = ((e.pageX - rect.left) / videoContainer.offsetWidth) * 100;
       if (position <= 100) {
-        videoClipper.style.width = position + "%";
-        handle.style.left = position + "%";
-        sliderBar.style.left = position + "%";
+        requestAnimationFrame(function() {
+          videoClipper.style.width = position + "%";
+          clippedVideo.style.width = ((100 / position) * 100) + "%";
+          clippedVideo.style.zIndex = 3;
+
+          sliderBar.style.left = position + "%";
+          leftArrow.style.left = `calc(${position}% - 15px)`;
+          rightArrow.style.right = `calc(${100 - position}% - 15px)`;
+        });
       }
     }
 
