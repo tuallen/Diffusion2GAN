@@ -91,25 +91,22 @@
     var v2 = document.getElementById("tgt");
 
     function video_click() {
-      // Play/pause both videos in sync
-      if (v.paused) {
-        // When playing, set the current time to match each other, then play both
-        v.currentTime = v2.currentTime;
-        v.play();
-        v2.play();
-      } else {
-        // Pause both videos
+      if (v.paused){
+       v.play();
+       v2.play(); 
+      }
+      else{
         v.pause();
         v2.pause();
       }
+      v.currentTime = v2.currentTime;
+      v2.currentTime = v.currentTime;
     }
 
     var videoContainer = document.getElementById("video-compare-container"),
     videoClipper = document.getElementById("video-clipper"),
     clippedVideo = videoClipper.getElementsByTagName("video")[0],
-    sliderBar = document.getElementById("slider-bar"),
-    leftArrow = document.getElementById("left-arrow"),
-    rightArrow = document.getElementById("right-arrow");
+    sliderBar = document.getElementById("slider-bar");
 
     function trackLocation(e) {
       var rect = videoContainer.getBoundingClientRect(),
@@ -121,8 +118,8 @@
 
         // Move the white bar and arrows to the same position as the clipper
         sliderBar.style.left = position + "%";
-        leftArrow.style.left = `calc(${position}% - 15px)`;
-        rightArrow.style.right = `calc(${100 - position}% - 15px)`;
+        document.getElementById("left-arrow").style.left = `calc(${position}% - 15px)`;
+        document.getElementById("right-arrow").style.right = `calc(${100 - position}% - 15px)`;
       }
     }
 
