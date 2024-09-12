@@ -40,10 +40,28 @@
       position: absolute;
       top: 0;
       bottom: 0;
-      width: 2px; /* width of the white bar */
-      background: white; /* color of the bar */
-      z-index: 5; /* make sure it's on top of the videos */
-      pointer-events: none; /* make it non-interactive */
+      width: 2px;
+      background: white;
+      z-index: 5;
+      pointer-events: none;
+    }
+
+    #left-arrow, #right-arrow {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 20px;
+      color: white;
+      z-index: 6;
+      pointer-events: none;
+    }
+
+    #left-arrow {
+      left: calc(50% - 15px);
+    }
+
+    #right-arrow {
+      right: calc(50% - 15px);
     }
   </style>
 </head>
@@ -64,6 +82,8 @@
       </video>
     </div>
     <div id="slider-bar"></div>
+    <div id="left-arrow">&#9664;</div> <!-- Left arrow -->
+    <div id="right-arrow">&#9654;</div> <!-- Right arrow -->
   </div>
 
   <script>
@@ -96,8 +116,10 @@
         clippedVideo.style.width = ((100 / position) * 100) + "%";
         clippedVideo.style.zIndex = 3;
 
-        // Move the white bar to the same position as the clipper
+        // Move the white bar and arrows to the same position as the clipper
         sliderBar.style.left = position + "%";
+        document.getElementById("left-arrow").style.left = `calc(${position}% - 15px)`;
+        document.getElementById("right-arrow").style.right = `calc(${100 - position}% - 15px)`;
       }
     }
 
