@@ -32,8 +32,18 @@
 
     #video-clipper video {
       width: 200%;
-      postion: absolute;
+      position: absolute;
       height: 100%;
+    }
+
+    #slider-bar {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      width: 2px; /* width of the white bar */
+      background: white; /* color of the bar */
+      z-index: 5; /* make sure it's on top of the videos */
+      pointer-events: none; /* make it non-interactive */
     }
   </style>
 </head>
@@ -46,16 +56,14 @@
 
   <div id="video-compare-container">
     <video id='src' loop autoplay onclick="video_click()">
-      <!-- <source src=https://s3-us-west-2.amazonaws.com/s.cdpn.io/4273/floodplain-dirty.mp4> -->
-      <!-- <source src=/loca/path/to/your/mp4> -->
-        <source src=playroom_pup.mp4>
+      <source src="playroom_pup.mp4">
     </video>
     <div id="video-clipper">
       <video id='tgt' loop autoplay onclick="video_click()">
-        <!-- <source src=https://s3-us-west-2.amazonaws.com/s.cdpn.io/4273/floodplain-clean.mp4> -->
-        <source src=playroom_lg.mp4>
+        <source src="playroom_lg.mp4">
       </video>
     </div>
+    <div id="slider-bar"></div>
   </div>
 
   <script>
@@ -71,15 +79,14 @@
         v.pause();
         v2.pause();
       }
-      // v.paused ? v.play() : v.pause();
-      // v2.paused ? v2.play() : v2.pause();
-      v.currentTime=v2.currentTime;
-      v2.currentTime=v.currentTime;
+      v.currentTime = v2.currentTime;
+      v2.currentTime = v.currentTime;
     }
 
     var videoContainer = document.getElementById("video-compare-container"),
     videoClipper = document.getElementById("video-clipper"),
-    clippedVideo = videoClipper.getElementsByTagName("video")[0];
+    clippedVideo = videoClipper.getElementsByTagName("video")[0],
+    sliderBar = document.getElementById("slider-bar");
 
     function trackLocation(e) {
       var rect = videoContainer.getBoundingClientRect(),
@@ -88,8 +95,12 @@
         videoClipper.style.width = position + "%";
         clippedVideo.style.width = ((100 / position) * 100) + "%";
         clippedVideo.style.zIndex = 3;
+
+        // Move the white bar to the same position as the clipper
+        sliderBar.style.left = position + "%";
       }
     }
+
     videoContainer.addEventListener("mousemove", trackLocation, false);
     videoContainer.addEventListener("touchstart", trackLocation, false);
     videoContainer.addEventListener("touchmove", trackLocation, false);
