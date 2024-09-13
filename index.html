@@ -64,6 +64,20 @@
     #right-arrow {
       right: calc(50% - 45px); /* Spaced farther from the line */
     }
+
+    /* Text overlay */
+    .overlay-text {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      font-size: 20px;
+      font-weight: bold;
+      color: white;
+      background-color: rgba(0, 0, 0, 0.6); /* Semi-transparent background */
+      padding: 5px 10px;
+      z-index: 10; /* Higher than the slider and videos */
+      border-radius: 5px;
+    }
   </style>
 </head>
 
@@ -75,13 +89,14 @@
 
   <div id="video-compare-container">
     <video id='src' loop autoplay muted onclick="video_click()">
-      <source src="playroom_pup.mp4">
+      <source src="playroom_lg.mp4">
     </video>
     <div id="video-clipper">
       <video id='tgt' loop autoplay muted onclick="video_click()">
-        <source src="playroom_lg.mp4">
+        <source src="playroom_pup.mp4">
       </video>
     </div>
+    <div class="overlay-text">PUP 3D-GS (Ours)</div>
     <div id="slider-bar"></div>
     <div id="left-arrow">&#9664;</div> <!-- Left arrow -->
     <div id="right-arrow">&#9654;</div> <!-- Right arrow -->
