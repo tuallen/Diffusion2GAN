@@ -193,13 +193,48 @@
         videoContainer.addEventListener("touchmove", trackLocation, false);
     </script>
 
-    =
     <section class="section">
         <div class="container is-max-desktop">
             <!-- Abstract. -->
             <div class="columns is-centered has-text-centered">
                 <div class="column is-four-fifths">
                     <h2 class="title is-3">Abstract</h2>
+                    <div class="content has-text-justified">
+                        <p>
+                            Recent advancements in novel view synthesis have enabled real-time rendering speeds and high
+                            reconstruction accuracy. 3D Gaussian Splatting (3D-GS), a foundational point-based
+                            parametric 3D scene representation, models scenes as large sets of 3D Gaussians. Complex
+                            scenes can comprise of millions of Gaussians, amounting to large storage and memory
+                            requirements that limit the viability of 3D-GS on devices with limited resources. Current
+                            techniques for compressing these pretrained models by pruning Gaussians rely on combining
+                            heuristics to determine which ones to remove.
+                        </p>
+                        <p>
+                            In this paper, we propose a principled spatial sensitivity pruning score that outperforms
+                            these approaches. It is computed as a second-order approximation of the reconstruction error
+                            on the training views with respect to the spatial parameters of each Gaussian. Additionally,
+                            we propose a multi-round prune-refine pipeline that can be applied to any pretrained 3D-GS
+                            model without changing the training pipeline.
+                        </p>
+                        <p>
+                            After pruning 88.44% of the Gaussians, we observe that our PUP 3D-GS pipeline
+                            increases the average rendering speed of 3D-GS by 2.65× while retaining more salient
+                            foreground information and achieving higher image quality metrics than previous pruning
+                            techniques on scenes from the Mip-NeRF 360, Tanks & Temples, and Deep Blending datasets.
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <!--/ Abstract. -->
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="container is-max-desktop">
+            <!-- Abstract. -->
+            <div class="columns is-centered has-text-centered">
+                <div class="column is-four-fifths">
+                    <h2 class="title is-3">Method</h2>
                     <div class="content has-text-justified">
                         <p>
                             Recent advancements in novel view synthesis have enabled real-time rendering speeds and high
@@ -238,50 +273,40 @@
 
             <div class="container" style="width: 53%;">
                 <div id="results-carousel" class="carousel results-carousel">
-                    <div class="item item-bicycle">
-                        <video poster="" id="bicycle" autoplay controls muted loop playsinline width="100%">
-                            <source src="static/videos/bicycle.mp4" type="video/mp4">
-                        </video>
-                    </div>
                     <div class="item item-bonsai">
                         <video poster="" id="bonsai" autoplay controls muted loop playsinline height="100%">
-                            <source src="static/videos/bonsai.mp4" type="video/mp4">
+                            <source src="static/videos/bonsai1.mp4" type="video/mp4">
                         </video>
                     </div>
                     <div class="item item-counter">
                         <video poster="" id="counter" autoplay controls muted loop playsinline height="100%">
-                            <source src="static/videos/counter.mp4" type="video/mp4">
-                        </video>
-                    </div>
-                    <div class="item item-flowers">
-                        <video poster="" id="flowers" autoplay controls muted loop playsinline height="100%">
-                            <source src="static/videos/flowers.mp4" type="video/mp4">
+                            <source src="static/videos/counter1.mp4" type="video/mp4">
                         </video>
                     </div>
                     <div class="item item-garden">
                         <video poster="" id="garden" autoplay controls muted loop playsinline height="100%">
-                            <source src="static/videos/garden.mp4" type="video/mp4">
+                            <source src="static/videos/garden1.mp4" type="video/mp4">
                         </video>
                     </div>
                     <div class="item item-kitchen">
                         <video poster="" id="kitchen" autoplay controls muted loop playsinline height="100%">
-                            <source src="static/videos/kitchen.mp4" type="video/mp4">
+                            <source src="static/videos/kitchen1.mp4" type="video/mp4">
                         </video>
                     </div>
                     <div class="item item-room">
                         <video poster="" id="room" autoplay controls muted loop playsinline height="100%">
-                            <source src="static/videos/room.mp4" type="video/mp4">
+                            <source src="static/videos/room1.mp4" type="video/mp4">
                         </video>
                     </div>
-                    <div class="item item-stump">
-                        <video poster="" id="stump" autoplay controls muted loop playsinline height="100%">
-                            <source src="static/videos/stump.mp4" type="video/mp4">
-                        </video>
-                    </div>
-                    <div class="item item-treehill">
-                        <video poster="" id="treehill" autoplay controls muted loop playsinline height="100%">
-                            <source src="static/videos/treehill.mp4" type="video/mp4">
-                        </video>
+                </div>
+            </div>
+            <div class="columns is-centered has-text-centered">
+                <div class="column is-8">
+                    <div class="content">
+                        <p>
+                            UPDATE: FPS statistics are higher than reported in our original preprint due to a rasterizer
+                            change.
+                        </p>
                     </div>
                 </div>
             </div>
