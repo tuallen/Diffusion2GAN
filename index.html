@@ -235,43 +235,49 @@
                 <div class="column is-four-fifths">
                     <h2 class="title is-3">Method</h2>
                     <div class="content has-text-justified">
-                      <p>
-                          We find that the sensitivity of the \( L_2 \) loss across the scene to a particular Gaussian
-                          \( \mathcal{G}_i \) can be used as a surprisingly effective pruning score.
-                      </p>
-                      <p>
-                          To compute this sensitivity, we first note that we can approximate the Hessian of the
-                          \( L_2 \) loss across the scene with respect to a particular Gaussian \( \mathcal{G}_i \) as:
-                      </p>
-                      <p>
-                          \[
-                          \nabla_{\mathcal{G}_i}^2 L_2 = \sum \nabla_{\mathcal{G}_i} I_{\mathcal{G}} \nabla_{\mathcal{G}_i} I_{\mathcal{G}}^T,
-                          \]
-                      </p>
+                        <p>
+                            We find that the sensitivity of the \( L_2 \) loss across the scene to a particular Gaussian
+                            \( \mathcal{G}_i \) can be used as a surprisingly effective pruning score.
+                        </p>
+                        <p>
+                            To compute this sensitivity, we first note that we can approximate the Hessian of the
+                            \( L_2 \) loss across the scene with respect to a particular Gaussian \( \mathcal{G}_i \)
+                            as:
+                        </p>
+                        <p>
+                            \[
+                            \nabla_{\mathcal{G}_i}^2 L_2 = \sum \nabla_{\mathcal{G}_i} I_{\mathcal{G}}
+                            \nabla_{\mathcal{G}_i} I_{\mathcal{G}}^T,
+                            \]
+                        </p>
 
-                      <p>
-                          where \( I_{\mathcal{G}} \) is a rendered training image and the sum is taken over all
-                          training images in the scene. This approximation is exact when the scene is converged.
-                          Please see our manuscript for additional details.
-                      </p>
-                      <p>
-                          Using only the mean \( x_i \) and scaling \( s_i \) parameters of this Gaussian \(\mathcal{G}\), we compute
-                          our sensitivity pruning score \( U_i \) as the log determinant of the Hessian:
-                      </p>
-                      <p>
-                          \[
-                          U_i = \log \left| \sum \nabla_{x_i,s_i} I_{\mathcal{G}} \nabla_{x_i,s_i} I_{\mathcal{G}}^T \right|.
-                          \]
-                      </p>
-                      <p>
-                          Intuitively, \( U_i \) measures the sharpness of the \( L_2 \) loss function around Gaussian
-                          \( \mathcal{G}_i \), where a higher \( U_i \) signifies that the \( L_2 \) loss across the scene is more
-                          sensitive to \( \mathcal{G}_i \).
-                      </p>
-                      <p>
-                          To prune a scene, we rank all of its Gaussians by this sensitivity pruning score and remove a given percentage of the least
-                          sensitive ones.
-                      </p>
+                        <p>
+                            where \( I_{\mathcal{G}} \) is a rendered training image and the sum is taken over all
+                            training images in the scene. This approximation is exact when the scene is converged.
+                            Please see our manuscript for additional details.
+                        </p>
+                        <p>
+                            Using only the mean \( x_i \) and scaling \( s_i \) parameters of this Gaussian
+                            \(\mathcal{G}\), we compute
+                            our sensitivity pruning score \( U_i \) as the log determinant of the Hessian:
+                        </p>
+                        <p>
+                            \[
+                            U_i = \log \left| \sum \nabla_{x_i,s_i} I_{\mathcal{G}} \nabla_{x_i,s_i} I_{\mathcal{G}}^T
+                            \right|.
+                            \]
+                        </p>
+                        <p>
+                            Intuitively, \( U_i \) measures the sharpness of the \( L_2 \) loss function around Gaussian
+                            \( \mathcal{G}_i \), where a higher \( U_i \) signifies that the \( L_2 \) loss across the
+                            scene is more
+                            sensitive to \( \mathcal{G}_i \).
+                        </p>
+                        <p>
+                            To prune a scene, we rank all of its Gaussians by this sensitivity pruning score and remove
+                            a given percentage of the least
+                            sensitive ones.
+                        </p>
 
                     </div>
                 </div>
@@ -334,114 +340,114 @@
                                 <div class="columns is-centered">
                                     <div class="column is-full-width">
                                         <div id="example1" class="bal-container-small">
-    
+
                                             <div class="bal-after">
                                                 <img src="./static/images/bicycle_our.png">
                                                 <div class="bal-afterPosition afterLabel" style="z-index:1;">
-                                                    Ours
+                                                    LightGaussian [Fan 2023]
                                                 </div>
                                             </div>
-    
+
                                             <div class="bal-before" style="width:96.4968152866242%;">
                                                 <div class="bal-before-inset" style="width: 539px;">
                                                     <img src="./static/images/bicycle_3dgs.png">
                                                     <div class="bal-beforePosition beforeLabel">
-                                                        3d-gs [Kerbl 2023]
+                                                        PUP 3D-GS (Ours)
                                                     </div>
                                                 </div>
                                             </div>
-    
+
                                             <div class="bal-handle" style="left:96.4968152866242%;">
                                                 <span class=" handle-left-arrow"></span>
                                                 <span class="handle-right-arrow"></span>
                                             </div>
-    
+
                                         </div>
-    
-    
+
+
                                         <div id="example2" class="bal-container-small">
-    
+
                                             <div class="bal-after">
-                                                <img src="./static/images/garden_our.png">
-                                                <div class="bal-afterPosition afterLabel">
-                                                    Ours
+                                                <img src="./static/images/bicycle_our.png">
+                                                <div class="bal-afterPosition afterLabel" style="z-index:1;">
+                                                    LightGaussian [Fan 2023]
                                                 </div>
                                             </div>
-    
-                                            <div class="bal-before" style="width: 50%;">
+
+                                            <div class="bal-before" style="width:96.4968152866242%;">
                                                 <div class="bal-before-inset" style="width: 539px;">
-                                                    <img src="./static/images/garden_vqdvgo.png">
+                                                    <img src="./static/images/bicycle_3dgs.png">
                                                     <div class="bal-beforePosition beforeLabel">
-                                                        VQDVGO [Li 2022]
+                                                        PUP 3D-GS (Ours)
                                                     </div>
                                                 </div>
                                             </div>
-    
+
                                             <div class="bal-handle" style="left: 50%;">
                                                 <span class=" handle-left-arrow"></span>
                                                 <span class="handle-right-arrow"></span>
                                             </div>
-    
+
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-    
-    
+
+
                         <!--/ Visual Effects. -->
-    
+
                         <!-- Matting. -->
                         <div class="column">
                             <div class="columns is-centered">
                                 <div class="column content">
-    
+
                                     <div id="example4" class="bal-container-small">
                                         <div class="bal-after">
-                                            <img src="./static/images/counter_our.png">
+                                            <img src="./static/images/bicycle_our.png">
                                             <div class="bal-afterPosition afterLabel" style="z-index:1;">
-                                                Ours
+                                                LightGaussian [Fan 2023]
                                             </div>
                                         </div>
-    
-                                        <div class="bal-before" style="width:62.10191082802548%;">
+
+                                        <div class="bal-before" style="width:96.4968152866242%;">
                                             <div class="bal-before-inset" style="width: 539px;">
-                                                <img src="./static/images/counter_3dgs.png">
+                                                <img src="./static/images/bicycle_3dgs.png">
                                                 <div class="bal-beforePosition beforeLabel">
-                                                    3d-gs [Kerbl 2023]
+                                                    PUP 3D-GS (Ours)
                                                 </div>
                                             </div>
                                         </div>
-    
+
                                         <div class="bal-handle" style="left:62.10191082802548%;">
                                             <span class=" handle-left-arrow"></span>
                                             <span class="handle-right-arrow"></span>
                                         </div>
-    
+
                                     </div>
-    
+
                                     <div id="example5" class="bal-container-small">
                                         <div class="bal-after">
-                                            <img src="./static/images/stump_our.png">
+                                            <img src="./static/images/bicycle_our.png">
                                             <div class="bal-afterPosition afterLabel" style="z-index:1;">
-                                                Ours
+                                                LightGaussian [Fan 2023]
                                             </div>
                                         </div>
-    
-                                        <div class="bal-before" style="width:56.77179962894249%;">
-                                            <div class="bal-before-inset" style="width: 628px;">
-                                                <img src="./static/images/stump_vqdvgo.png">
+
+                                        <div class="bal-before" style="width:96.4968152866242%;">
+                                            <div class="bal-before-inset" style="width: 539px;">
+                                                <img src="./static/images/bicycle_3dgs.png">
                                                 <div class="bal-beforePosition beforeLabel">
-                                                    VQDVGO [Li 2022]
+                                                    PUP 3D-GS (Ours)
                                                 </div>
                                             </div>
                                         </div>
-    
+
                                         <div class="bal-handle" style="left:56.77179962894249%;">
                                             <span class=" handle-left-arrow"></span>
                                             <span class="handle-right-arrow"></span>
                                         </div>
-    
+
                                     </div>
                                 </div>
                             </div>
