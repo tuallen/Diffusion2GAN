@@ -4,8 +4,8 @@
 <head>
     <meta charset="utf-8">
     <meta name="description"
-        content="Deformable Neural Radiance Fields creates free-viewpoint portraits (nerfies) from casually captured videos.">
-    <meta name="keywords" content="Nerfies, D-NeRF, NeRF">
+        content="PUP 3D-GS compresses 3D scene data using a mathematically principled pruning score, tripling rendering speed with minimal loss of visual fidelity.">
+    <meta name="keywords" content="PUP 3D-GS, pup3dgs, principled uncertainty pruning, Gaussian Splatting, Gaussian">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>PUP 3D-GS: Principled Uncertainty Pruning for 3D
         Gaussian Splatting</title>
@@ -127,8 +127,8 @@
         </div>
     </section>
 
-    <section class="hero teaser">
-        <div class="hero-body">
+    <section class="hero">
+        <div class="hero-teaser">
             <div id="video-compare-container">
                 <video id='src' loop autoplay muted onclick="video_click()">
                     <source src="./static/videos/playroom_lg_metrics.mp4">
@@ -197,7 +197,6 @@
 
     <section class="section">
         <div class="container is-max-desktop">
-            <!-- Abstract. -->
             <div class="columns is-centered has-text-centered">
                 <div class="column is-four-fifths">
                     <h2 class="title is-3">Abstract</h2>
@@ -227,7 +226,6 @@
                     </div>
                 </div>
             </div>
-            <!--/ Abstract. -->
         </div>
     </section>
 
@@ -239,11 +237,11 @@
                     <div class="content has-text-justified">
                       <p>
                           We find that the sensitivity of the \( L_2 \) loss across the scene to a particular Gaussian
-                          \( \mathcal{G}_i \) provides a surprisingly effective pruning score.
+                          \( \mathcal{G}_i \) can be used as a surprisingly effective pruning score.
                       </p>
                       <p>
                           To compute this sensitivity, we first note that we can approximate the Hessian of the
-                          \( L_2 \) loss across the scene with respect to a particular Gaussian \( \mathcal{G}_i \) by:
+                          \( L_2 \) loss across the scene with respect to a particular Gaussian \( \mathcal{G}_i \) as:
                       </p>
                       <p>
                           \[
@@ -254,11 +252,11 @@
                       <p>
                           where \( I_{\mathcal{G}} \) is a rendered training image and the sum is taken over all
                           training images in the scene. This approximation is exact when the scene is converged.
-                          Please see our work for additional details.
+                          Please see our manuscript for additional details.
                       </p>
                       <p>
-                          Using only the mean \( x_i \) and scaling \( s_i \) parameters of this Gaussian, we compute
-                          our pruning score \( U_i \) as the log determinant of the Hessian:
+                          Using only the mean \( x_i \) and scaling \( s_i \) parameters of this Gaussian \(\mathcal{G}\), we compute
+                          our sensitivity pruning score \( U_i \) as the log determinant of the Hessian:
                       </p>
                       <p>
                           \[
@@ -267,12 +265,12 @@
                       </p>
                       <p>
                           Intuitively, \( U_i \) measures the sharpness of the \( L_2 \) loss function around Gaussian
-                          \( \mathcal{G}_i \) where a sharper \( U_i \) signifies that the \( L_2 \) loss is more
+                          \( \mathcal{G}_i \), where a higher \( U_i \) signifies that the \( L_2 \) loss across the scene is more
                           sensitive to \( \mathcal{G}_i \).
                       </p>
                       <p>
-                          To prune, we rank all Gaussians by this score and remove a given percentage of the least
-                          sensitive.
+                          To prune a scene, we rank all of its Gaussians by this sensitivity pruning score and remove a given percentage of the least
+                          sensitive ones.
                       </p>
 
                     </div>
@@ -287,7 +285,7 @@
                 <h2 class="title is-3">Results</h2>
             </div>
 
-            <div class="container" style="width: 60%;">
+            <div class="container">
                 <div id="results-carousel" class="carousel results-carousel">
                     <div class="item item-bonsai">
                         <video poster="" id="bonsai" autoplay controls muted loop playsinline height="100%">
@@ -327,7 +325,7 @@
                 </div>
             </div>
 
-            <div class="container" style="width: 60%;">
+            <div class="container">
                 <div class=" has-text-centered">
                     <div class="columns is-centered">
                         <!-- Visual Effects. -->
